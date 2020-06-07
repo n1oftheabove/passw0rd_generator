@@ -87,8 +87,8 @@ def handle_args(argv):
     ments and for each, the value None is provided, if the corresponding value
     is not in the keywords.
     """
-    no_of_chars = None
-    no_of_pwds = 1
+    no_of_chars = '1'
+    no_of_pwds = '1'
     choice = 'n'
 
     try:
@@ -101,13 +101,24 @@ def handle_args(argv):
             print("Usage: \n passw0rd_generator.py -c <no_of_chars> -n"\
                   " <no_of_pwds> -s <savetocsv>")
             sys.exit()
-        elif opt in ("-c", "--charsize"):
-            no_of_chars = arg
         elif opt in ("-n", "--numberofpwds"):
             no_of_pwds = arg
         elif opt in ("-s", "--savetocsv"):
             choice = arg
+        # Making -c mandatory:
+        if not opt in ("-c", "--charsize"):
+            print("Providing -c or --charsize value is mandatory. Try again.")
+            sys.exit()
+        else:
+            no_of_chars = arg
     return no_of_chars, no_of_pwds, choice
+
+def info_wrong_script_usage():
+    print("Wrong usage. Usage: \n passw0rd_generator.py -c <no_of_chars>"\
+          " -n <no_of_pwds> -s <savetocsv>\n type of <no_of_chars> : "\
+          " int >= 0 \n type of <no_of_pwds> : int >=0\n type of <choice> "\
+          ": str of ('Y'|'y'|'N'|'n') ")
+    sys.exit()
 
 # DECLARATION OF MAIN PROGRAMS
 
@@ -171,11 +182,7 @@ def main(no_of_chars, no_of_pwds, choice):
         isdigit(no_of_pwds)
         is_choice_valid(choice)
     except ValueError:
-        print("Wrong usage. Usage: \n passw0rd_generator.py -c <no_of_chars>"\
-              " -n <no_of_pwds> -s <savetocsv>\n type of <no_of_chars> : "\
-              " int >= 0 \n type of <no_of_pwds> : int >=0\n type of <choice> "\
-              ": str of ('Y'|'y'|'N'|'n') ")
-        sys.exit()
+        info_wrong_script_usage()
 
     pws =  [generate_pw_w_random(no_of_chars) for n in range(int(no_of_pwds))]
     print("Here are your 'safe' passwords:\n")
