@@ -32,7 +32,7 @@ Type the following command
 
 
 ```console
-foo@bar:~$ python3 passw0rd_generator.py
+foo@bar:~$ python3 passw0rd-generator.py
 ```
 and answer the following questions of how much characters you want your passwords to have, how many and if you want them to save to ```.csv```.
 
@@ -49,6 +49,6 @@ Use the above commad with the following keyword arguments:
 
 The command
 ```console
-foo@bar:~$ python3 passw0rd_generator.py -c 5 -n 10 -s y
+foo@bar:~$ python3 passw0rd-generator.py -c 5 -n 10 -s y
 ```
 would print out 10 passwords with 5 randomly generated characters each to the console and save them as ```.csv``` to the folder the script is executed in.
