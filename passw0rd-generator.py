@@ -87,6 +87,7 @@ def handle_args(argv):
     ments and for each, the value None is provided, if the corresponding value
     is not in the keywords.
     """
+
     no_of_chars = '1'
     no_of_pwds = '1'
     choice = 'n'
@@ -96,7 +97,12 @@ def handle_args(argv):
     except getopt.GetoptError:
         print('test.py -c <no_of_chars> -n <no_of_pwds> -s <savetocsv? y|n >')
         sys.exit(2)
+    # Make sure, -c is provided
+    if "-c" not in argv and "--charsize" not in argv:
+        print("Providing -c or --charsize value is mandatory. Try again.")
+        sys.exit()
     for opt, arg in opts:
+        print(opt, arg)
         if opt == '-h':
             print("Usage: \n passw0rd_generator.py -c <no_of_chars> -n"\
                   " <no_of_pwds> -s <savetocsv>")
@@ -105,10 +111,6 @@ def handle_args(argv):
             no_of_pwds = arg
         elif opt in ("-s", "--savetocsv"):
             choice = arg
-        # Making -c mandatory:
-        if not opt in ("-c", "--charsize"):
-            print("Providing -c or --charsize value is mandatory. Try again.")
-            sys.exit()
         else:
             no_of_chars = arg
     return no_of_chars, no_of_pwds, choice
