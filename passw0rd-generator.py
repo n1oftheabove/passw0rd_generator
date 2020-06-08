@@ -55,7 +55,6 @@ def save_to_csv(pw_list, filename):
     file = open(filename, 'w')
     with file:
         writer = csv.writer(file, delimiter='\n')
-        print('pw_list', pw_list)
         writer.writerow(pw_list)
     print(f"Writing is done, saved as {filename}")
 
@@ -97,7 +96,8 @@ def handle_args(argv):
     except getopt.GetoptError:
         print('test.py -c <no_of_chars> -n <no_of_pwds> -s <savetocsv? y|n >')
         sys.exit(2)
-    # Make sure, -c is provided
+
+    # Make sure, -c or --charsize is provided
     if "-c" not in argv and "--charsize" not in argv:
         print("Providing -c or --charsize value is mandatory. Try again.")
         sys.exit()
